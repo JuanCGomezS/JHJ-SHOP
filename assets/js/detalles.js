@@ -1,9 +1,3 @@
-/**
-* Template Name: iPortfolio - v3.9.1
-* Template URL: https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
 (function () {
   "use strict";
 
@@ -15,7 +9,9 @@
     if (all) {
       return [...document.querySelectorAll(el)]
     } else {
-      return document.querySelector(el)
+      if (document.querySelector(el)) {
+        return document.querySelector(el);
+      }
     }
   }
 
@@ -245,6 +241,9 @@
    * Animation on scroll
    */
   window.addEventListener('load', () => {
+    const loader = document.getElementById("loader");
+    loader.setAttribute('class', ``);
+
     AOS.init({
       duration: 1000,
       easing: 'ease-in-out',
@@ -258,9 +257,11 @@
    */
   new PureCounter();
 
+  //'https://drive.google.com/uc?export=view&id=1PSUNUK1oQ9MxHyArnn20Uj0ivpmgmoiH'
 
+  //Array Produtos Detalles
 
-  /* const listDetalles = [
+  const listDetalles = [
     {
       url_path: '1187OX395HEs54A_hhjO3i-cib4SWSobF',
       nombre: 'Parlante Unicornio $30.000',
@@ -2165,14 +2166,15 @@
       producto: 'Agendas',
       prod: 'filter-age'
     },
-  ]; */
-/* 
-  const getDetalles = async () => {
+  ];
+
+
+  const getProduct = async (list, prod) => {
     return new Promise((resolve, reject) => {
-      const producto = document.getElementById("detalles");
-      listDetalles.forEach(element => {
+      list.forEach(element => {
+        const producto = document.getElementById(prod);
         const $article = document.createElement("div");
-        $article.setAttribute('class', `img-container col-lg-4 col-md-6 portfolio-item filter-det`);
+        $article.setAttribute('class', `img-container col-lg-4 col-md-6 portfolio-item`);
 
         const $div = document.createElement("div");
         $div.setAttribute('class', 'portfolio-wrap');
@@ -2202,318 +2204,56 @@
         $div.appendChild($div_portafolio);
         $article.appendChild($div);
         producto.appendChild($article);
+
       });
 
-      resolve(listDetalles);
+      resolve(list);
     })
   }
 
-  const getPocillos = async () => {
-    return new Promise((resolve, reject) => {
-      const producto = document.getElementById("pocillos");
-      listPocillos.forEach(element => {
-        const $article = document.createElement("div");
-        $article.setAttribute('class', `img-container col-lg-4 col-md-6 portfolio-item filter-poc`);
-
-        const $div = document.createElement("div");
-        $div.setAttribute('class', 'portfolio-wrap');
-
-        const $img = document.createElement("img")
-        $img.setAttribute('class', 'img-fluid');
-        $img.setAttribute('src', `https://drive.google.com/uc?export=view&id=${element.url_path}`);
-        $img.setAttribute('alt', '');
-
-        const $div_portafolio = document.createElement("div");
-        $div_portafolio.setAttribute('class', 'portfolio-links');
-
-        const $a = document.createElement("a");
-        $a.setAttribute('class', 'portfolio-lightbox');
-        $a.setAttribute('style', `background: ${element.color}`);
-        $a.setAttribute('href', `https://drive.google.com/uc?export=view&id=${element.url_path}`);
-        $a.setAttribute('data-gallery', 'portfolioGallery');
-
-        const $i = document.createElement("i");
-        $i.setAttribute('class', 'bx');
-        $i.setAttribute('style', `color: #000; font-family: sans-serif; font-size: 20px`);
-        $i.textContent = element.nombre;
-
-        $a.appendChild($i);
-        $div_portafolio.appendChild($a);
-        $div.appendChild($img);
-        $div.appendChild($div_portafolio);
-        $article.appendChild($div);
-        producto.appendChild($article);
-      });
-      resolve(listPocillos)
-    })
+  const setClass = () => {
+    const loader = document.getElementById("loader");
+    loader.setAttribute('class', `loader`);
   }
 
-  const getVasosTermos = async () => {
-    return new Promise((resolve, reject) => {
-      const producto = document.getElementById("vasostermos");
-      listVasostermos.forEach(element => {
-        const $article = document.createElement("div");
-        $article.setAttribute('class', `img-container col-lg-4 col-md-6 portfolio-item filter-vyt`);
-
-        const $div = document.createElement("div");
-        $div.setAttribute('class', 'portfolio-wrap');
-
-        const $img = document.createElement("img")
-        $img.setAttribute('class', 'img-fluid');
-        $img.setAttribute('src', `https://drive.google.com/uc?export=view&id=${element.url_path}`);
-        $img.setAttribute('alt', '');
-
-        const $div_portafolio = document.createElement("div");
-        $div_portafolio.setAttribute('class', 'portfolio-links');
-
-        const $a = document.createElement("a");
-        $a.setAttribute('class', 'portfolio-lightbox');
-        $a.setAttribute('style', `background: ${element.color}`);
-        $a.setAttribute('href', `https://drive.google.com/uc?export=view&id=${element.url_path}`);
-        $a.setAttribute('data-gallery', 'portfolioGallery');
-
-        const $i = document.createElement("i");
-        $i.setAttribute('class', 'bx');
-        $i.setAttribute('style', `color: #000; font-family: sans-serif; font-size: 20px`);
-        $i.textContent = element.nombre;
-
-        $a.appendChild($i);
-        $div_portafolio.appendChild($a);
-        $div.appendChild($img);
-        $div.appendChild($div_portafolio);
-        $article.appendChild($div);
-        producto.appendChild($article);
-      });
-      resolve(listVasostermos)
-    })
+  if (document.getElementById("detalles")) {
+    setClass();
+    getProduct(listDetalles, "detalles");
   }
 
-  const getFunko = async () => {
-    return new Promise((resolve, reject) => {
-      const producto = document.getElementById("funkoPop");
-      listFunko.forEach(element => {
-        const $article = document.createElement("div");
-        $article.setAttribute('class', `img-container col-lg-4 col-md-6 portfolio-item filter-fun`);
-
-        const $div = document.createElement("div");
-        $div.setAttribute('class', 'portfolio-wrap');
-
-        const $img = document.createElement("img")
-        $img.setAttribute('class', 'img-fluid');
-        $img.setAttribute('src', `https://drive.google.com/uc?export=view&id=${element.url_path}`);
-        $img.setAttribute('alt', '');
-
-        const $div_portafolio = document.createElement("div");
-        $div_portafolio.setAttribute('class', 'portfolio-links');
-
-        const $a = document.createElement("a");
-        $a.setAttribute('class', 'portfolio-lightbox');
-        $a.setAttribute('style', `background: ${element.color}`);
-        $a.setAttribute('href', `https://drive.google.com/uc?export=view&id=${element.url_path}`);
-        $a.setAttribute('data-gallery', 'portfolioGallery');
-
-        const $i = document.createElement("i");
-        $i.setAttribute('class', 'bx');
-        $i.setAttribute('style', `color: #000; font-family: sans-serif; font-size: 20px`);
-        $i.textContent = element.nombre;
-
-        $a.appendChild($i);
-        $div_portafolio.appendChild($a);
-        $div.appendChild($img);
-        $div.appendChild($div_portafolio);
-        $article.appendChild($div);
-        producto.appendChild($article);
-      });
-      resolve(listFunko)
-    })
+  if (document.getElementById("vasostermo")) {
+    setClass();
+    getProduct(listVasostermos, "vasostermo");
   }
 
-  const getNinos = async () => {
-    return new Promise((resolve, reject) => {
-      const producto = document.getElementById("ninos");
-      listNinos.forEach(element => {
-        const $article = document.createElement("div");
-        $article.setAttribute('class', `img-container col-lg-4 col-md-6 portfolio-item filter-nin`);
-
-        const $div = document.createElement("div");
-        $div.setAttribute('class', 'portfolio-wrap');
-
-        const $img = document.createElement("img")
-        $img.setAttribute('class', 'img-fluid');
-        $img.setAttribute('src', `https://drive.google.com/uc?export=view&id=${element.url_path}`);
-        $img.setAttribute('alt', '');
-
-        const $div_portafolio = document.createElement("div");
-        $div_portafolio.setAttribute('class', 'portfolio-links');
-
-        const $a = document.createElement("a");
-        $a.setAttribute('class', 'portfolio-lightbox');
-        $a.setAttribute('style', `background: ${element.color}`);
-        $a.setAttribute('href', `https://drive.google.com/uc?export=view&id=${element.url_path}`);
-        $a.setAttribute('data-gallery', 'portfolioGallery');
-
-        const $i = document.createElement("i");
-        $i.setAttribute('class', 'bx');
-        $i.setAttribute('style', `color: #000; font-family: sans-serif; font-size: 20px`);
-        $i.textContent = element.nombre;
-
-        $a.appendChild($i);
-        $div_portafolio.appendChild($a);
-        $div.appendChild($img);
-        $div.appendChild($div_portafolio);
-        $article.appendChild($div);
-        producto.appendChild($article);
-      });
-      resolve(listNinos)
-    })
+  if (document.getElementById("pocillo")) {
+    setClass();
+    getProduct(listPocillos, "pocillo");
   }
 
-  const getPapeleria = async () => {
-    return new Promise((resolve, reject) => {
-      const producto = document.getElementById("papeleria");
-      listPapeleria.forEach(element => {
-        const $article = document.createElement("div");
-        $article.setAttribute('class', `img-container col-lg-4 col-md-6 portfolio-item filter-pap`);
-
-        const $div = document.createElement("div");
-        $div.setAttribute('class', 'portfolio-wrap');
-
-        const $img = document.createElement("img")
-        $img.setAttribute('class', 'img-fluid');
-        $img.setAttribute('src', `https://drive.google.com/uc?export=view&id=${element.url_path}`);
-        $img.setAttribute('alt', '');
-
-        const $div_portafolio = document.createElement("div");
-        $div_portafolio.setAttribute('class', 'portfolio-links');
-
-        const $a = document.createElement("a");
-        $a.setAttribute('class', 'portfolio-lightbox');
-        $a.setAttribute('style', `background: ${element.color}`);
-        $a.setAttribute('href', `https://drive.google.com/uc?export=view&id=${element.url_path}`);
-        $a.setAttribute('data-gallery', 'portfolioGallery');
-
-        const $i = document.createElement("i");
-        $i.setAttribute('class', 'bx');
-        $i.setAttribute('style', `color: #000; font-family: sans-serif; font-size: 20px`);
-        $i.textContent = element.nombre;
-
-        $a.appendChild($i);
-        $div_portafolio.appendChild($a);
-        $div.appendChild($img);
-        $div.appendChild($div_portafolio);
-        $article.appendChild($div);
-        producto.appendChild($article);
-      });
-      resolve(listPapeleria)
-    })
+  if (document.getElementById("nino")) {
+    setClass();
+    getProduct(listNinos, "nino");
   }
 
-  const getLamparas = async () => {
-    return new Promise((resolve, reject) => {
-      const producto = document.getElementById("lamparas");
-      listLamparas.forEach(element => {
-        const $article = document.createElement("div");
-        $article.setAttribute('class', `img-container col-lg-4 col-md-6 portfolio-item filter-lam`);
-
-        const $div = document.createElement("div");
-        $div.setAttribute('class', 'portfolio-wrap');
-
-        const $img = document.createElement("img")
-        $img.setAttribute('class', 'img-fluid');
-        $img.setAttribute('src', `https://drive.google.com/uc?export=view&id=${element.url_path}`);
-        $img.setAttribute('alt', '');
-
-        const $div_portafolio = document.createElement("div");
-        $div_portafolio.setAttribute('class', 'portfolio-links');
-
-        const $a = document.createElement("a");
-        $a.setAttribute('class', 'portfolio-lightbox');
-        $a.setAttribute('style', `background: ${element.color}`);
-        $a.setAttribute('href', `https://drive.google.com/uc?export=view&id=${element.url_path}`);
-        $a.setAttribute('data-gallery', 'portfolioGallery');
-
-        const $i = document.createElement("i");
-        $i.setAttribute('class', 'bx');
-        $i.setAttribute('style', `color: #000; font-family: sans-serif; font-size: 20px`);
-        $i.textContent = element.nombre;
-
-        $a.appendChild($i);
-        $div_portafolio.appendChild($a);
-        $div.appendChild($img);
-        $div.appendChild($div_portafolio);
-        $article.appendChild($div);
-        producto.appendChild($article);
-      });
-      resolve(listLamparas)
-    })
+  if (document.getElementById("lampara")) {
+    setClass();
+    getProduct(listLamparas, "lampara");
   }
 
-  const getAgendas = async () => {
-    return new Promise((resolve, reject) => {
-      const producto = document.getElementById("agendas");
-      listAgendas.forEach(element => {
-        const $article = document.createElement("div");
-        $article.setAttribute('class', `img-container col-lg-4 col-md-6 portfolio-item filter-age`);
-
-        const $div = document.createElement("div");
-        $div.setAttribute('class', 'portfolio-wrap');
-
-        const $img = document.createElement("img")
-        $img.setAttribute('class', 'img-fluid');
-        $img.setAttribute('src', `https://drive.google.com/uc?export=view&id=${element.url_path}`);
-        $img.setAttribute('alt', '');
-
-        const $div_portafolio = document.createElement("div");
-        $div_portafolio.setAttribute('class', 'portfolio-links');
-
-        const $a = document.createElement("a");
-        $a.setAttribute('class', 'portfolio-lightbox');
-        $a.setAttribute('style', `background: ${element.color}`);
-        $a.setAttribute('href', `https://drive.google.com/uc?export=view&id=${element.url_path}`);
-        $a.setAttribute('data-gallery', 'portfolioGallery');
-
-        const $i = document.createElement("i");
-        $i.setAttribute('class', 'bx');
-        $i.setAttribute('style', `color: #000; font-family: sans-serif; font-size: 20px`);
-        $i.textContent = element.nombre;
-
-        $a.appendChild($i);
-        $div_portafolio.appendChild($a);
-        $div.appendChild($img);
-        $div.appendChild($div_portafolio);
-        $article.appendChild($div);
-        producto.appendChild($article);
-      });
-      resolve(listAgendas)
-    })
+  if (document.getElementById("papeleria")) {
+    setClass();
+    getProduct(listPapeleria, "papeleria");
   }
 
-
-  getDetalles().then(async res => {
-    await getPocillos().then(async res => {
-      await getVasosTermos().then(async res => {
-        await getFunko().then(async res => {
-          await getNinos().then(async res => {
-            await getPapeleria().then(async res => {
-              await getLamparas().then(async res => {
-                await getAgendas().then(async res => {
-                })
-              })
-            })
-          })
-        })
-      }
-      )
-    }
-    )
+  if (document.getElementById("agenda")) {
+    setClass();
+    getProduct(listAgendas, "agenda");
   }
-  );
- */
 
-
-  //getNinos();
-  //getPapeleria();
-  //getLamparas();
-  //getAgendas();
+  if (document.getElementById("funko")) {
+    setClass();
+    getProduct(listFunko, "funko");
+  }
 
 })()
